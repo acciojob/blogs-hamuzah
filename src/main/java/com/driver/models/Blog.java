@@ -8,59 +8,40 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "blog")
+@Table(name = "BlogInfo")
 public class Blog{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    String title;
-
-    String content;
+    private int id;
+    private String title;
+    private String content;
 
     @CreationTimestamp
-    Date pubDate;
+    private Date pubDate;
 
     @ManyToOne
     @JoinColumn
-    User user;
+    private User user;
 
     @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
-    List<Image> images = new ArrayList<>();
+    private List<Image> imageList=new ArrayList<>();
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Blog() {
     }
 
-    public void setPubDate(Date pubDate) {
+    public Blog(String title, String content, Date pubDate, User user) {
+        this.title = title;
+        this.content = content;
         this.pubDate = pubDate;
-    }
-
-    public void setImageList(List<Image> images) {
-        this.images = images;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public Date getPubDate() {
-        return pubDate;
-    }
-
-    public List<Image> getImageList() {
-        return images;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
         this.user = user;
     }
 
-    public Blog() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -77,5 +58,29 @@ public class Blog{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(Date pubDate) {
+        this.pubDate = pubDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }
